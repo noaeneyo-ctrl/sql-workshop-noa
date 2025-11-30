@@ -1,21 +1,20 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-
-// TODO: Import database connection
-// const connection = require('../db/connection');
+const { addSchool } = require("../scripts/addSchool");
+const { getSchoolAdmins } = require("../scripts/getSchoolAdmins");
 
 /**
  * GET /schools
  * Retrieve all schools from the database
  */
-router.get('/', (req, res) => {
-  // TODO: Write SQL query to SELECT all schools
-  // TODO: Execute query using database connection
-  // TODO: Send response with school data
-  // TODO: Handle errors appropriately
-  
-  res.json({ message: 'TODO: Implement GET /schools endpoint' });
+router.get("/admins", (req, res) => {
+  getSchoolAdmins();
+});
+
+router.post("/:add", (req, res) => {
+  const { schoolname } = req.body;
+  if (!schoolname) throw new Error("school should be defined");
+  addSchool(schoolname);
 });
 
 module.exports = router;
-
